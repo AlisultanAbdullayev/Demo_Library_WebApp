@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container col-lg-12">
+    <br/>
+    <div align="center">
+        <h1>Books List</h1>
+    </div>
+    <hr>
+    <form th:action="@{/books}" class="form-inline" method="get">
+        <!--        <input type="text" class="form-control mr-sm-2" name="search" id="filter" size="50"  placeholder="Search author" aria-label="Search"/>-->
+        <input type="text" name="keyword" id="keyword" th:value="${keyword}" class="form-control col-lg-10"
+               placeholder="Search books by name, author, isbn, seri" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" style="margin-left: 25px" type="submit">Search</button>
+    </form>
+    <br/>
+    <table border="1" class="table table-responsive-md table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                Book's Name
+            </th>
+            <th scope="col">
+                Books's Alt Name
+            </th>
+            <th scope="col">
+                Books's Seri Name
+            </th>
+            <th scope="col">
+                Books's Author
+            </th>
+            <th scope="col">
+                Books's Publisher
+            </th>
+            <th scope="col">
+                Books's ISBN
+            </th>
+            <th scope="col">
+                Books's Description
+            </th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row" th:each="book : ${booksList}">
+            <!--            <td th:text="${book.id}"></td>-->
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.altName}"></td>
+            <td th:text="${book.seriName}"></td>
+            <td th:text="${book.author.fullName}"></td>
+            <td th:text="${book.publisher.name}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.description}"></td>
+            <td>
+                <div class="d-flex justify-content-around">
+                    <a th:href="@{'/books/update/' + ${book.id}}" class="btn btn-info">Update</a>
+                    <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <a th:href="@{/books/new}" class="btn btn-primary col-2">Add Book</a>
+        <a th:href="@{/}" class="btn btn-secondary col-2">Go Home</a>
+    </div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

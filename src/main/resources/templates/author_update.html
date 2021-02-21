@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SHELF - Your Online Bookstore</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" align="center">
+    <br>
+    <h1>Author Management System</h1>
+    <hr>
+    <br>
+    <div align="left">
+        <h2>Update Author</h2>
+        <br>
+        <form th:action="@{/authors/save}" th:object="${author}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <input type="text" th:field="*{fullName}" placeholder="Author Full Name" class="form-control mb-4 col-4"
+                   required/>
+            <textarea type="text" th:field="*{about}" placeholder="About Author" class="form-control mb-4 col-4"
+                      required></textarea>
+            <button type="submit" class="btn btn-success col-2">Update Author</button>
+            <a th:href="@{/authors}" class="btn btn-primary col-2">All Authors</a>
+        </form>
+    </div>
+</div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

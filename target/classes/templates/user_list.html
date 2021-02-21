@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Of Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<br>
+<br>
+<div class="container" align="center">
+<h1 >User's lists</h1>
+</div>
+<br>
+<hr>
+<br>
+<div class="container">
+<table border="1" class="table table-responsive-md table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">
+            Usernames
+        </th>
+        <th scope="col">
+            Roles
+        </th>
+        <th scope="col">
+            Actions
+        </th>
+    </tr>
+    <tbody>
+        <tr scope="row" th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+<!--            <td th:each="role : ${user.roles}">-->
+<!--                <p th:text="${user.roles}"></p>-->
+<!--            </td>-->
+            <td th:text="${user.roles}"></td>
+            <td>
+                <div class="d-flex justify-content-around">
+                <a class="btn btn-warning col-2" th:href="@{/user/{id}(id=${user.id})}">Edit</a>
+                <a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-danger col-2">Delete</a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="container" align="center">
+    <a th:href="@{/posts}" class="btn btn-primary col-2">Posts</a>
+    <br>
+    <br>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" class="btn btn-dark col-2"/>
+    </form>
+</div>
+</div>
+</body>
+</html>

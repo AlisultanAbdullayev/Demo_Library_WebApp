@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SHELF - Your Online Bookstore</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" align="center">
+    <br>
+    <h1>Books Management System</h1>
+    <hr>
+    <br>
+    <div align="left">
+        <h2>Save Books</h2>
+        <br>
+        <form th:action="@{/books/save}" th:object="${book}" method="post">
+            <input type="text" th:field="*{name}" placeholder="Book's Name" class="form-control mb-4 col-4" required/>
+            <input type="text" th:field="*{altName}" placeholder="Book's Alt Name" class="form-control mb-4 col-4"
+                   required/>
+            <input type="text" th:field="*{seriName}" placeholder="Book's Seri Name" class="form-control mb-4 col-4"
+                   required/>
+
+            <!--            <form th:action="@{books/search/authors}" method="post">-->
+            <!--            <div class="md-form active-cyan active-cyan-2 mb-3">-->
+            <!--                <input class="form-control" type="text" name="filter" th:value="${filter}" placeholder="Search by Author's name">-->
+            <!--                <br>-->
+            <!--                <button type="submit" class="btn btn-warning col-2" >Search</button>-->
+            <!--            </div>-->
+            <!--            </form>-->
+
+            <select th:field="*{author}" class="form-control" required>
+                <span th:each="auth : ${authorList}">
+                    <option th:text="${auth.fullName}" th:value="${auth.id}"></option>
+                </span>
+            </select>
+            <br>
+            <select th:field="*{publisher}" class="form-control" required>
+                <span th:each="pub : ${publisherList}">
+                    <option th:text="${pub.name}" th:value="${pub.id}"></option>
+                </span>
+            </select>
+            <br>
+            <!--            <input type="text" th:field = "*{name}" placeholder="Book's Name" class="form-control mb-4 col-4" required/>-->
+            <!--            <input type="text" th:field = "*{name}" placeholder="Book's Name" class="form-control mb-4 col-4" required/>-->
+            <input type="text" th:field="*{isbn}" placeholder="Book's ISBN" class="form-control mb-4 col-4" required/>
+            <textarea th:field="*{description}" placeholder="About Book" class="form-control mb-4 col-4"
+                      required></textarea>
+            <button type="submit" class="btn btn-success col-2">Add Book</button>
+            <a th:href="@{/books}" class="btn btn-primary col-2">All Books</a>
+        </form>
+    </div>
+</div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

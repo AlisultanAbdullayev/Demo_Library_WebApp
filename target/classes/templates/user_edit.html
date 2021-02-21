@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Edit Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<form th:action="@{/user}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}" th:value="${user.id}">
+    <input type="text" th:field="*{username}" th:value="${user.username}">
+<div th:each="role : ${allRoles}">
+    <input th:field="*{roles}" type="checkbox" th:value="${role}">
+    <td th:text="${role}"></td>
+</div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

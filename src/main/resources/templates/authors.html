@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div align="center">
+        <h1>Authors List</h1>
+    </div>
+    <hr>
+    <br/>
+    <form th:action="@{/authors}" class="form-inline" method="get">
+        <!--        <input type="text" class="form-control mr-sm-2" name="search" id="filter" size="50"  placeholder="Search author" aria-label="Search"/>-->
+        <input type="text" name="keyword" id="keyword" th:value="${keyword}" class="form-control mr-sm-2"
+               placeholder="Search author" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+    <table border="1" class="table table-responsive-md table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <!--            <th scope="col">-->
+            <!--                ID</a>-->
+            <!--            </th>-->
+            <th scope="col">
+                Author's Full Name</a>
+            </th>
+            <th scope="col">
+                About Author</a>
+            </th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row" th:each="author : ${authorsList}">
+            <!--            <td th:text="${author.id}"></td>-->
+            <td th:text="${author.fullName}"></td>
+            <td th:text="${author.about}"></td>
+            <td>
+                <div class="d-flex justify-content-around">
+                    <a th:href="'/authors/update/' + ${author.id} " class="btn btn-info">Update</a>
+                    <!--                    <a th:href="@{/authors/update/{id}(id=${author.id})}" class="btn btn-info">Update</a>-->
+                    <a th:href="@{/authors/delete/{id}(id=${author.id})}" class="btn btn-danger ">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <a th:href="@{/authors/new}" class="btn btn-primary col-2">Add Author</a>
+        <a th:href="@{/}" class="btn btn-secondary col-2">Go Home</a>
+    </div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
